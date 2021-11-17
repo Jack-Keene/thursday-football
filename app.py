@@ -351,7 +351,7 @@ def edit_player():
     player = db.session.query(Players).filter(Players.player_id==session['id']).first()
 
     if request.method == 'POST':
-        Players.query.filter(Players.player_id==1).update(dict(first_name=request.form['first_name'], last_name=request.form['last_name'], position=request.form['position'], squad_number=request.form['squad_number']))
+        Players.query.filter(Players.player_id==session['id']).update(dict(first_name=request.form['first_name'], last_name=request.form['last_name'], position=request.form['position'], squad_number=request.form['squad_number']))
         db.session.commit()
         flash('Details Updated')
         return redirect('/account')
