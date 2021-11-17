@@ -240,11 +240,12 @@ def add_fixture():
 def add_player():
     teams = db.session.query(Teams).all()
     if request.method =='POST':
+        username = request.form['username']
         first_name=request.form['first_name']
         last_name = request.form['last_name']
         team_id=request.form['team'].split(' | ')[0]
         # print(team_id)/
-        player=Players(team_id, first_name, last_name, None, None, None,None)
+        player=Players(team_id, first_name, last_name, username, None, None,None)
         db.session.add(player)
         db.session.commit()
 
@@ -334,6 +335,7 @@ def set_password():
         if request.form['password']==request.form['confirm_password']:
             Players.query.filter(Players.player_id==session['id']).update(dict(hashed=sha256_crypt.hash(str(request.form['password']))))
             db.session.commit()
+            flash('Password Updated')
             return redirect('/login')
 
     return render_template('change_password.html')
@@ -351,6 +353,8 @@ def edit_player():
     if request.method == 'POST':
         Players.query.filter(Players.player_id==1).update(dict(first_name=request.form['first_name'], last_name=request.form['last_name'], position=request.form['position'], squad_number=request.form['squad_number']))
         db.session.commit()
+        flash('Details Updated')
+        return redirect('/account')
 
     return render_template('edit_player.html', player=player)
 
