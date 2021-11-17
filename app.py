@@ -13,7 +13,7 @@ app = Flask(__name__)
 # app.config['DEBUG'] = True
 # app.config['ENV'] = 'development'
 
-ENV = 'prod'
+ENV = 'dev'
 
 app.secret_key="secret_key"
 
@@ -143,12 +143,10 @@ def login():
 
         # test to see if user exists
         result = db.session.query(Players).filter(Players.username==username).first()
-
-        if result.hashed==None:
-            session['id'] = result.player_id
-            return redirect(url_for('set_password'))
-
         if result != None:
+            if result.hashed==None:
+                session['id'] = result.player_id
+                return redirect(url_for('set_password'))
             password = result.hashed
             if sha256_crypt.verify(password_candidate, password):
                 #login successful
