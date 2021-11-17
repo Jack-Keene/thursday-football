@@ -37,7 +37,7 @@ class Players(db.Model):
     username = db.Column(db.String(length=100), unique=True, nullable=True)
     hashed = db.Column(db.String(length=255), nullable=True)
     squad_number = db.Column(db.Integer, nullable=True)
-    position = db.Column(db.String(length=100), nullable=False)
+    position = db.Column(db.String(length=100), nullable=True)
     type = db.Column(db.String(length=100), nullable=False)
 
     def __init__(self, team_id, first_name, last_name, username, hashed, squad_number, position):
@@ -446,7 +446,6 @@ def team_data(id):
     stats = db.session.query(players).join(appearance, players.c.player_id==appearance.c.player_id).outerjoin(goals,players.c.player_id==goals.c.player_id).outerjoin(assists, players.c.player_id==assists.c.player_id).outerjoin(cs, players.c.player_id==cs.c.player_id).outerjoin(fp, players.c.player_id==fp.c.player_id).add_columns(appearance.c.appearances, goals.c.goals, assists.c.assists, cs.c.clean_sheets, fp.c.fp_points).order_by(fp.c.fp_points.desc()).all()
 
     return render_template('teams.html', stats=stats)
-
 
 if __name__ == '__main__':
     
