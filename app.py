@@ -13,7 +13,7 @@ app = Flask(__name__)
 # app.config['DEBUG'] = True
 # app.config['ENV'] = 'development'
 
-ENV = 'dev'
+ENV = 'prod'
 
 app.secret_key="secret_key"
 
