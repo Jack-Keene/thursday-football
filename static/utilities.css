@@ -3,15 +3,23 @@
     max-width: 1100px;
     margin: 0 auto;
     overflow: auto;
-    /* padding: 0 40px; */
 }
+
+.alert {
+    width: 100%;
+    color: white;
+    height: 20px;
+    background-color: green;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+} 
 
 @media(max-width:500) {
     .fixture .container {
         padding: 0 0;
     }
 }
-
 
 .flex {
     display: flex;

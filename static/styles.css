@@ -404,7 +404,10 @@ h1 {
 
 .league-table .flex {
     flex-wrap: wrap;
+    display: flex;
+    padding: 0 30px;
 }
+
 
 table {
     margin: 1rem;
