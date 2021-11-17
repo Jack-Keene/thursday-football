@@ -22,7 +22,7 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:m4rt9r6H@localhost/football'
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://gsgjwkikyldgen:296c51725ee925ce8f31f5a76e91620ccb05430d2477ddef88264932938c3b5e@ec2-3-208-157-78.compute-1.amazonaws.com:5432/d5sgut048e16dp'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://gsgjwkikyldgen:296c51725ee925ce8f31f5a76e91620ccb05430d2477ddef88264932938c3b5e@ec2-3-208-157-78.compute-1.amazonaws.com:5432/d5sgut048e16dp'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
