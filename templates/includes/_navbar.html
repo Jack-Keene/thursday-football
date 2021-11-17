@@ -1,0 +1,22 @@
+<div class="navbar">
+    <div class="container flex">
+        <h1 class="logo"><a href="/">Mates/Lads FC</a></h1>
+        <nav>
+            <ul>
+                <li><a href="/league_table">League Table</a></li>
+                <li><a href="/fixtures">Fixtures & Results</a></li>
+                <li><a href="/players">Players</a></li>
+                {% if session.access_level ==2  %}
+                <li><a href="/admin_page">Admin</a></li>
+                {% endif %}
+                {% if session.logged_in %}
+                <li><a class="" href="/account">My Account</a></li>
+                <li><a class="" href="/logout">Logout</a></li>
+                {% else %}
+                <li><a class="" href="/login">Login</a></li>
+                <!-- <li><a class="" href="/register">Register</a> </li> -->
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>

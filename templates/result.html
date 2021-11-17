@@ -1,0 +1,108 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+<section class="result-page">
+    <div class="container flex bg">
+        <div class="card">
+            <div class="grid">
+                <h2>{{ result.date.strftime('%dth %B %Y') }} | Thursday 7'S Premier League</h2>
+                <h1>{{ result[2] }}</h1>
+                <div class="score"> {{ result[4] }}</div>
+                <div class="score"> {{ result[6] }}</div>
+                <h1>{{ result[5] }}</h1>
+            </div>
+            <div class="grid">
+                <div></div>
+                <div class="goalscorers flex">
+                    {% for goal in game_stats['home_goals'] %}
+                    <div class="">
+                        {{goal[3]}}{% if goal[1] > 1 %}(x{{goal[1]}}){% endif  %}{{", " if not loop.last else " "}} 
+                    </div>
+                    {% endfor %}
+                </div>
+                <div></div>
+                <div></div>
+                <div class="goalscorers flex">
+                    {% for goal in game_stats['away_goals'] %}
+                    <div class="">
+                    {{goal[3]}}{% if goal[1] > 1 %}(x{{goal[1]}}){% endif  %}{{", " if not loop.last else " "}} 
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <hr>
+            <div class="grid">
+                <div></div>
+                <div class="goalscorers flex">
+                    {% for assist in game_stats['home_assist'] %}
+                    <div class="">
+                    {{ assist[3] }}{% if assist[1] > 1 %}(x{{assist[1]}}){% endif  %}{{", " if not loop.last else ""}} 
+                    </div>
+                    {% endfor %}
+                </div>
+                <div></div>
+                <div></div>
+                <div class="goalscorers flex">
+                    {% for assist in game_stats['away_assist'] %}
+                    <div class="">
+                        {{ assist[3] }}{% if assist[1] > 1 %}(x{{assist[1]}}){% endif  %}{{", " if not loop.last else ""}} 
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class= "grid grid-2-1">
+    <div class="flex">          
+        <table>
+            <thead>
+                <tr>
+                    {% if game_stats['home_lineup']|length != 0 %}
+                    <th>Number</th>
+                    <th>Player</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for appearance in game_stats['home_lineup'] %}
+                <a href="">
+                    <tr>
+                        <td>{{ appearance.squad_number }}</td>
+                        <td><a href="{{url_for('player', id=appearance.player_id)}}">{{ appearance.first_name }} {{ appearance.last_name }}</a></td>
+                    </tr>
+                </a>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="flex">
+        <table>
+            <thead>
+                <tr>
+                    {% if game_stats['away_lineup']|length != 0 %}
+                    <th>Number</th>
+                    <th>Player</th>
+                    {% endif %}
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for appearance in game_stats['away_lineup'] %}
+                <a href="">
+                    <tr>
+                        <td>{{ appearance.squad_number }}</td>
+                        <td><a href="{{url_for('player', id=appearance.player_id)}}">{{ appearance.first_name }} {{ appearance.last_name }}</a></td>
+                    </tr>
+                </a>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<section class="match-report">
+    
+</section>
+
+
+{% endblock %}

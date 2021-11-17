@@ -1,0 +1,14 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+
+<section class="add-team">
+    <div class="card flex">
+        <form method="POST">
+            <h1>Add Team</h1>
+            <input autocomplete="off"placeholder="Team Name" type="text" name="team_name">
+            <button class="btn" type="submit">Submit</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

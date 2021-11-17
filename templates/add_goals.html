@@ -1,0 +1,103 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+
+<section>
+    <div class="add-goal">
+        <form method="POST">
+            <div class="card grid">
+                <div class="">
+                    <h3>Goalscorer</h3>
+                    {% for goal in range(home_goals) %}
+                    <select class="form-control" name="Goal {{ goal }}">
+                        {% for player in home_players %}
+                        <option> {{ player.team_id }} | {{ player.player_id }} | {{ player.first_name }} {{
+                            player.last_name}} - {{ player.team_name }} | {{ player.position }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h3>Assist</h3>
+                    {% for goal in range(home_goals) %}
+                    <select class="form-control" name="Assist {{ goal }}">
+                        {% for player in home_players %}
+                        <option> {{ player.team_id }} | {{ player.player_id }} | {{ player.first_name }} {{
+                            player.last_name}} - {{ player.team_name }} | {{ player.position }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% endfor %}
+
+                </div>
+                <div class="">
+                    <h3>Goalscorer</h3>
+                    {% for goal in range(away_goals) %}
+                    <select class="form-control" name="Goal {{ goal }}">
+                        {% for player in away_players %}
+                        <option> {{ player.team_id }} | {{ player.player_id }} | {{ player.first_name }} {{
+                            player.last_name
+                            }} - {{ player.team_name }} | {{ player.position }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h3>Assist</h3>
+                    {% for goal in range(away_goals) %}
+                    <select class="form-control" name="Assist {{ goal }}">
+                        {% for player in away_players %}
+                        <option> {{ player.team_id }} | {{ player.player_id }} | {{ player.first_name }} {{
+                            player.last_name
+                            }} - {{ player.team_name }} | {{ player.position }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h3>Appearances</h3>
+                    {% for appearance in range(9) %}
+                    <select class="form-control" name="appearance {{ appearance }}">
+                        {% for player in home_players %}
+                        <option> {{ player.team_id }} | {{ player.player_id }} | {{ player.first_name }} {{
+                            player.last_name}} - {{ player.team_name }} | {{ player.position }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h3>Home Clean Sheet?</h3>
+                    <select class="form-control" name="home_clean_sheet">
+                        <option>Y</option>
+                        <option>N</option>
+                    </select>
+
+                </div>
+                <div>
+                    <h3>Appearances</h3>
+                    {% for appearance in range(9) %}
+                    <select class="form-control" name="appearance {{ appearance }}">
+                        {% for player in away_players %}
+                        <option> {{ player.team_id }} | {{ player.player_id }} | {{ player.first_name }} {{
+                            player.last_name}} - {{ player.team_name }} | {{ player.position }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h3>Away Clean Sheet?</h3>
+                    <select class="form-control" name="away_clean_sheet">
+                        <option>Y</option>
+                        <option>N</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

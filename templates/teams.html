@@ -1,0 +1,40 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+
+<section class="league-table">
+    <div class="container flex">
+        <div>
+            <table>
+                <tr>
+                    <thead>
+                        <td class="hide">Number</td>
+                        <td>Player Name</td>
+                        <td class="hide">Position</td>
+                        <td class="hide">Appearances</td>
+                        <td class="">Goals</td>
+                        <td class="">Assists</td>
+                        <td class="">Clean Sheets</td>
+                        <td>FP Points</td>
+                    </thead>
+                </tr>
+                {% for player in stats %}
+                <tr>
+                    <tbody>
+                        <td class="hide" style="font-weight: bold;">{{ player.squad_number }}</td>
+                        <td style="font-weight: bold;"><a href="{{url_for('player', id=player.player_id)}}">{{ player.first_name }} {{ player.last_name }}</a></td>
+                        <td  class="hide">{{ player.position }}</td>
+                        <td class="hide">{{ player.appearances if player.appearances is not none else 'N/A' }}</td>
+                        <td class="">{{ player.goals if player.goals is not none else '0'}}</td>
+                        <td class="">{{ player.assists if player.assists is not none else '0' }}</td>
+                        <td class="">{{ player.clean_sheets if player.clean_sheets is not none else '0' }}</td>
+                        <td>{{ player.fp_points }}</td>
+                    </tbody>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

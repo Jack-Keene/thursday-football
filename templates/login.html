@@ -1,0 +1,28 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+<section class="login">
+    <body class="text-center">
+        <div class="container card">
+            <div class="">
+              <form method='POST' class="p-4 p-md-5 border rounded-3 bg-light">
+                  <div class="flex">
+                  <input autofocus autocomplete='off' type="text" name="username" class="form-control" placeholder = 'Username' value={{request.form.username}}>
+                </div>
+                <div class="flex">
+                  <input autocomplete='off' type="password" name="password" class="form-control" placeholder = 'Password' value={{request.form.password}}>
+                </div>
+                <div class="flex">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                </div>
+                <hr style="margin: 10px;">
+                <div class="flex">
+                    <small><a href="/register">Sign up</a></small>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </body>
+</section>
+
+{% endblock %}

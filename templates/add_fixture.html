@@ -1,0 +1,53 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+
+<section class="add-team">
+    <div class="card flex">
+        <form method="POST">
+            <div class="flex">
+                <h2>Home Team</h2>
+                <select class="form-control" name="home_team">
+                    {% for team in teams %}
+                    <option > {{ team.team_id }} | {{ team.team_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="flex">
+                <h2>Away Team</h2>
+                <select class="form-control" name="away_team">
+                    {% for team in teams %}
+                    <option > {{ team.team_id }} | {{ team.team_name }}</option>
+                    {% endfor %}
+                </select>   
+            </div>
+            <div class="flex">
+                <h2>League</h2>
+                <select class="form-control" name="league">League Name
+                    {% for league in leagues %}
+                    <option > {{ league.league_id }} | {{ league.league_name }}</option>
+                    {% endfor %}
+                </select>   
+            </div>
+            <div class="flex">
+                <h2>Date</h2>
+                <input class="form-control" type='date' name="date"></input>
+            </div>
+            <div class="flex">
+                <h2>Time</h2>
+                <select class="form-control" name="time">League Name
+                    <option selected="">7:30</option>
+                    <option >8:15</option>
+                    <option >9:00</option>
+                </select>   
+            </div>
+
+
+
+            <div class="flex">
+                <button class="btn" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

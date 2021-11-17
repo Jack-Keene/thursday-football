@@ -1,0 +1,13 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+{% if session.access_level==2 %}
+<section class="admin">
+    <ul>
+        <div class="card"><a href="/add_team"><h1>Add Team</h1></a></div>
+        <div class="card"><a href="/add_league"><h1>Add League</h1></a></div>
+        <div class="card"><a href="/add_player"><h1>Add Players</h1></a></div>
+        <div class="card"><a href="/add_fixture"><h1>Add Fixtures</h1></a></div>
+    </ul>
+</section>
+{% endif %}
+{% endblock %}

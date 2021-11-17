@@ -1,0 +1,85 @@
+{% extends 'includes/_layout.html' %}
+{% block body %}
+<section class="players">
+    <h3>Goalkeepers</h3>
+    <div class="container grid">
+        {% for player in players['goalkeepers'] %}
+        <a href="{{url_for('player', id=player.player_id)}}">
+            <div class="grid-2 card">
+                <div>
+                    <h1>{{ player.first_name }} {{ player.last_name }}</h2>
+                </div>
+                <div class="container bg">
+                    <h3>{{ player.last_name }}</h3>
+                    <h1> {{ player.squad_number }} </h1>
+                </div>
+                <div>
+                    <h2>{{ player.team_name }}</h2>                            
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <h3>Defenders</h3>
+    <div class="container grid">
+        {% for player in players['defenders'] %}
+        <a href="{{url_for('player', id=player.player_id)}}">
+            <div class="grid-2 card">
+                <div>
+                    <h1>{{ player.first_name }} {{ player.last_name }}</h2>
+                </div>
+                <div class="container bg">
+                    <h3>{{ player.last_name }}</h3>
+                    <h1> {{ player.squad_number }} </h1>
+                </div>
+                <div>
+                    <h2>{{ player.team_name }}</h2>                            
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <h3>Midfielders</h3>
+    <div class="container grid">
+        {% for player in players['midfielders'] %}
+        <a href="{{url_for('player', id=player.player_id)}}">
+            <div class="grid-2 card">
+                <div>
+                    <h1>{{ player.first_name }} {{ player.last_name }}</h2>
+                </div>
+                <div class="container bg">
+                    <h3>{{ player.last_name }}</h3>
+                    <h1> {{ player.squad_number }} </h1>
+                </div>
+                <div>
+                    <h2>{{ player.team_name }}</h2>                            
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <h3>Forwards</h3>
+    <div class="container grid">
+        {% for player in players['forwards'] %}
+        <a href="{{url_for('player', id=player.player_id)}}">
+            <div class="grid-2 card">
+                <div>
+                    <h1>{{ player.first_name }} {{ player.last_name }}</h2>
+                </div>
+                <div class="container bg">
+                    <h3>{{ player.last_name }}</h3>
+                    <h1> {{ player.squad_number }} </h1>
+                </div>
+                <div>
+                    <h2>{{ player.team_name }}</h2>                            
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+
+</section>
+
+
+{% endblock %}
