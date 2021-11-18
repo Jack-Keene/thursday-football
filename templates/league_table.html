@@ -2,18 +2,18 @@
 {% block body %}
 
 <section class="league-table">
-    <div class="container flex">
+    <div class="container">
         <h1 style="padding-top: 1rem;">Thursday 7'S Premier League</h1>
         <table>
             <tr>
                 <thead>
                     <td></td>
-                    <td>Team Name</td>
+                    <td>Team</td>
                     <td>Played</td>
-                    <td class="hide-mobile">Goals For</td>
-                    <td class="hide-mobile">Goals Against</td>
-                    <td>GD</td>
-                    <td>Points</td>
+                    <td class="hide-mobile"><abbr title="Goals For">GF</abbr></td>
+                    <td class="hide-mobile"><abbr title="Goals Against">GA</abbr></td>
+                    <td class=""><abbr title="Goal Difference">GD</abbr></td>
+                    <td class=""><abbr title="Points">P</abbr></td>
                 </thead>
             </tr>
             {% for position, team in table %}

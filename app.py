@@ -241,11 +241,13 @@ def add_player():
     teams = db.session.query(Teams).all()
     if request.method =='POST':
         username = request.form['username']
+        position = request.form['position']
+        squad_number = request.form['squad_number']
         first_name=request.form['first_name']
         last_name = request.form['last_name']
         team_id=request.form['team'].split(' | ')[0]
         # print(team_id)/
-        player=Players(team_id, first_name, last_name, username, None, None,None)
+        player=Players(team_id, first_name, last_name, username, None, squad_number, position)
         db.session.add(player)
         db.session.commit()
 
@@ -452,5 +454,5 @@ def team_data(id):
     return render_template('teams.html', stats=stats)
 
 if __name__ == '__main__':
-    
+    app.debug = True
     app.run()

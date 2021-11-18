@@ -1,55 +1,60 @@
 {% extends 'includes/_layout.html' %}
 {% block body %}
 <section class="player">
-    <div class="">
-        <div class="grid grid-2">
-            <div class="flex" style="height: 2rem;"></div>
-            <div class="card stats-card">
-                <h1>Player Info</h1>
-                <hr>
-                <table>
-                    <tbody>
-                        <tr><td><strong>Name:</strong>  {{ stats.first_name }} {{ stats.last_name }} </td></tr>
-                        <tr><td><strong>First Appearance:</strong> {{ stats.date.strftime('%dth %B %Y') if stats.date is not none else 'N/A'}}</td></tr>
-                    </tbody>
-                </table>
-                <div class="container bg">
-                    <h3>{{ stats.last_name }}</h3>
-                    <h1> {{ stats.squad_number }} </h1>
-                </div>
+    <div class="grid-2">
+        <div class="flex" style="height: 2rem;"></div>
+        <div class="card stats-card">
+            <h1>Player Info</h1>
+            <hr>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><strong>Name:</strong> {{ stats.first_name }} {{ stats.last_name }} </td>
+                    </tr>
+                    <tr>
+                        <td><strong>First Appearance:</strong> {{ stats.date.strftime('%dth %B %Y') if stats.date is not
+                            none else 'N/A'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container bg">
+                <h3>{{ stats.last_name }}</h3>
+                <h1> {{ stats.squad_number }} </h1>
             </div>
+        </div>
 
-            <div class="card">
-                <div class="grid grid-4">
-                    <div>
-                        <h1 style="text-align: start; font-size: 3rem;">Statistics</h1>
-                    </div>
-                    <div class="card stats">
-                        <img src="/static/img/overhead_kick-transparent.png" width="50%">
-                        <h1> {{ stats.appearances if stats.appearances is not none else '0' }} </h1>
-                        <h3>Appearances</h3>
-                    </div>
-                    <div class="card stats">
-                        <img src="/static/img/kick-transparent.png" alt="" width="50%">
-                        <h1> {{ stats.appearances * 45 }} </h1>
-                        <h3>Minutes Played</h3>
-                    </div>
-                    <div class="card stats">
-                        <img src="/static/img/celebrate-transparent.png" alt="" width="50%">
-                        <h1> {{ stats.goals if stats.goals is not none else '0' }} </h1>
-                        <h3>Goals</h3>
-                    </div>
-                    <div class="card stats">
-                        <img src="/static/img/stand-transparent.png" alt="" width="50%">
-                        <h1>{{ stats.assists if stats.assists is not none else '0'}} </h1>
-                        <h3>Assists</h3>
-                    </div>
+        <div class="card">
+            <div class="grid-4">
+                <div>
+                    <h1 style="text-align: start; ">Statistics</h1>
+                </div>
+                <div class="card stats">
+                    <img src="/static/img/overhead_kick-transparent.png" width="50%">
+                    <h1> {{ stats.appearances if stats.appearances is not none else '0' }} </h1>
+                    <h3>Appearances</h3>
+                </div>
+                <div class="card stats">
+                    <img src="/static/img/kick-transparent.png" alt="" width="50%">
+                    <h1> {{ stats.appearances * 45 }} </h1>
+                    <h3>Minutes Played</h3>
+                </div>
+                <div class="card stats">
+                    <img src="/static/img/celebrate-transparent.png" alt="" width="50%">
+                    <h1> {{ stats.goals if stats.goals is not none else '0' }} </h1>
+                    <h3>Goals</h3>
+                </div>
+                <div class="card stats">
+                    <img src="/static/img/stand-transparent.png" alt="" width="50%">
+                    <h1>{{ stats.assists if stats.assists is not none else '0'}} </h1>
+                    <h3>Assists</h3>
                 </div>
             </div>
         </div>
     </div>
-    <a href="/players"><button class="btn">View all Players</button></a>
-    <a href="{{url_for('team_data', id=stats.team_id)}}"><button class="btn">View Team Stats</button></a>
+    <div class="flex">
+        <a href="/players"><button class="btn btn-lg">View all Players</button></a>
+        <a href="{{url_for('team_data', id=stats.team_id)}}"><button class="btn">View Team Stats</button></a>
+    </div>
 </section>
 
 

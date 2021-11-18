@@ -2,18 +2,36 @@
 {% block body %}
 
 <section class="add-player">
-    <div class="card grid">
+    <div class="card">
         <form method="POST">
-            <h1>Add Player</h1>
-            <input autocomplete="off"placeholder="Username" type="text" name="username"> 
-            <input autocomplete="off"placeholder="First Name" type="text" name="first_name"> 
-            <input autocomplete="off"placeholder="Last Name" type="text" name="last_name">
-            <select class="form-control" name="team">
-                {% for team in teams %}
-                <option > {{ team.team_id }} | {{ team.team_name }}</option>
-                {% endfor %}
-            </select>   
-        <button class="btn" type="submit">Submit</button>
+            <div class="grid">
+                <h1>Add Player</h1>
+                <div>
+                    <input autocomplete="off" placeholder="Username" type="text" name="username">
+                </div>
+                <div>
+                    <input autocomplete="off" placeholder="First Name" type="text" name="first_name">
+                </div>
+                <div>
+                    <input autocomplete="off" placeholder="Last Name" type="text" name="last_name">
+                </div>
+                <div>
+                    <select class="form-control" name="position">
+                        <option> Goalkeeper </option>
+                        <option> Defender </option>
+                        <option> Midfielder </option>
+                        <option> Forward </option>
+                    </select>
+                </div>
+                <input class="form-control" autocomplete="off" placeholder="Squad Number" type="text"
+                    name="squad_number">
+                <select class="form-control" name="team">
+                    {% for team in teams %}
+                    <option> {{ team.team_id }} | {{ team.team_name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn" type="submit">Submit</button>
+            </div>
         </form>
     </div>
 </section>

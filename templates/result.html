@@ -53,53 +53,56 @@
         </div>
     </div>
 </section>
-<div class= "grid grid-2-1">
-    <div class="flex">          
-        <table>
-            <thead>
-                <tr>
-                    {% if game_stats['home_lineup']|length != 0 %}
-                    <th>Number</th>
-                    <th>Player</th>
-                    {% endif %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for appearance in game_stats['home_lineup'] %}
-                <a href="">
+<section class="lineups">
+    <div class= "grid grid-2-1">
+        <div class="flex">          
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ appearance.squad_number }}</td>
-                        <td><a href="{{url_for('player', id=appearance.player_id)}}">{{ appearance.first_name }} {{ appearance.last_name }}</a></td>
+                        {% if game_stats['home_lineup']|length != 0 %}
+                        <th>Number</th>
+                        <th>Player</th>
+                        {% endif %}
                     </tr>
-                </a>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for appearance in game_stats['home_lineup'] %}
+                    <a href="">
+                        <tr>
+                            <td>{{ appearance.squad_number }}</td>
+                            <td><a href="{{url_for('player', id=appearance.player_id)}}">{{ appearance.first_name }} {{ appearance.last_name }}</a></td>
+                        </tr>
+                    </a>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex">
+            <table>
+                <thead>
+                    <tr>
+                        {% if game_stats['away_lineup']|length != 0 %}
+                        <th>Number</th>
+                        <th>Player</th>
+                        {% endif %}
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appearance in game_stats['away_lineup'] %}
+                    <a href="">
+                        <tr>
+                            <td>{{ appearance.squad_number }}</td>
+                            <td><a href="{{url_for('player', id=appearance.player_id)}}">{{ appearance.first_name }} {{ appearance.last_name }}</a></td>
+                        </tr>
+                    </a>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="flex">
-        <table>
-            <thead>
-                <tr>
-                    {% if game_stats['away_lineup']|length != 0 %}
-                    <th>Number</th>
-                    <th>Player</th>
-                    {% endif %}
+</section>
 
-                </tr>
-            </thead>
-            <tbody>
-                {% for appearance in game_stats['away_lineup'] %}
-                <a href="">
-                    <tr>
-                        <td>{{ appearance.squad_number }}</td>
-                        <td><a href="{{url_for('player', id=appearance.player_id)}}">{{ appearance.first_name }} {{ appearance.last_name }}</a></td>
-                    </tr>
-                </a>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 <section class="match-report">
     
 </section>
