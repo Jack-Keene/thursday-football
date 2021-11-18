@@ -395,10 +395,10 @@ def players():
     players = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id).all()
     players = {}
     
-    players['defenders'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).filter(Players.position=='Defender', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
-    players['midfielders'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).filter(Players.position=='Midfielder', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
-    players['forwards'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).filter(Players.position=='Forward', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
-    players['goalkeepers'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).filter(Players.position=='Goalkeeper', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
+    players['defenders'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).join(Stats, Players.player_id==Stats.player_id).filter(Players.position=='Defender', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
+    players['midfielders'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).join(Stats, Players.player_id==Stats.player_id).filter(Players.position=='Midfielder', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
+    players['forwards'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).join(Stats, Players.player_id==Stats.player_id).filter(Players.position=='Forward', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
+    players['goalkeepers'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).join(Stats, Players.player_id==Stats.player_id).filter(Players.position=='Goalkeeper', Teams.team_id==1).add_columns(Players.first_name, Players.last_name, Players.squad_number, Teams.team_name, Players.player_id, Players.position).order_by(Players.squad_number).all()
 
     return render_template('players.html', players=players)
 
@@ -410,25 +410,8 @@ def player(id):
     assists = db.session.query(Stats.player_id, func.count(Stats.stat_type).label('assists')).filter(Stats.player_id==id, Stats.stat_type=='Assist').group_by(Stats.player_id).subquery() 
     cs = db.session.query(Stats.player_id, func.count(Stats.stat_type).label('clean_sheets')).filter(Stats.player_id==id, Stats.stat_type=='clean_sheet').group_by(Stats.player_id).subquery() 
     first_appearance = db.session.query(Stats).join(Fixture, Stats.fixture_id==Fixture.fixture_id).filter(Stats.player_id==id,Stats.stat_type=='appearance', Stats.player_id==id).add_columns(Fixture.date).order_by(Fixture.date).subquery()
-    stats = db.session.query(player).join(appearance, player.c.player_id==appearance.c.player_id).outerjoin(goals,player.c.player_id==goals.c.player_id).outerjoin(assists, player.c.player_id==assists.c.player_id).outerjoin(cs, player.c.player_id==cs.c.player_id).join(first_appearance, player.c.player_id==first_appearance.c.player_id).add_columns(player.c.first_name, appearance.c.appearances, goals.c.goals, assists.c.assists, cs.c.clean_sheets, first_appearance.c.date).first()
-    # print(stats)
-    # player['goals'] = db.session.query(func.count(Stats.stat_type)).filter(Stats.player_id==id, Stats.stat_type=='Goal').group_by(Stats.stat_type).count()
+    stats = db.session.query(player).outerjoin(appearance, player.c.player_id==appearance.c.player_id).outerjoin(goals,player.c.player_id==goals.c.player_id).outerjoin(assists, player.c.player_id==assists.c.player_id).outerjoin(cs, player.c.player_id==cs.c.player_id).join(first_appearance, player.c.player_id==first_appearance.c.player_id).add_columns(player.c.first_name, appearance.c.appearances, goals.c.goals, assists.c.assists, cs.c.clean_sheets, first_appearance.c.date).first()
 
-    # player['appearances'] = db.session.query(Stats.stat_type).filter(Stats.player_id==id, Stats.stat_type=='appearance').count()
-    # print(player)
-    # first_app = db.session.query(Stats).join(Fixture, Stats.fixture_id==Fixture.fixture_id).filter(Stats.player_id==id).add_columns(Fixture.date).order_by(Fixture.date).first()
-    
-    # if first_app == None:
-    #     player['first_appearance'] = 'N/A'
-    # else:
-    #     player['first_appearance'] = first_app[1].strftime('%dth %B %Y')
-
-    # player['goals'] = db.session.query(Stats.stat_type).filter(Stats.player_id==id, Stats.stat_type=='Goal').count()
-    # player['assists'] = db.session.query(Stats.stat_type).filter(Stats.player_id==id, Stats.stat_type=='Assist').count()
-    # player['details'] = db.session.query(Players).join(Teams, Players.team_id==Teams.team_id).filter(Players.player_id==id).add_columns(Players.squad_number, Players.first_name, Players.last_name, Teams.team_name, Teams.team_id).first()
-
-    if stats.date == None:
-        stats = (11, 1, 'Johnny', 'Boutwood', None, None, 3, 'Defender', 'Player', 'Johnny', 2, None, None, 1, (2021, 11, 4))
     return render_template('player.html', stats=stats)
 
 @app.route('/league_table')
@@ -454,5 +437,4 @@ def team_data(id):
     return render_template('teams.html', stats=stats)
 
 if __name__ == '__main__':
-    app.debug = True
     app.run()
