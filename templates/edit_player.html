@@ -5,14 +5,15 @@
     <div class="card grid ">
         <form method="POST">
             <h1>Edit Details</h1>
-            <div>
+            <div class="flex">
                 <label for="first_name">First Name</label>
                 <input class="form-control" autocomplete="off" placeholder="First Name" type="text" value="{{player.first_name}}"  name="first_name"> 
+            </div>
+            <div class="flex">
                 <label for="first_name">Last Name</label>
-
                 <input class="form-control" autocomplete="off" placeholder="Last Name" type="text"  value="{{player.last_name}}" name="last_name">    
             </div>
-            <div>
+            <div class="flex">
                 <label for="position">Position</label>&nbsp;
                 <select class="form-control" name="position">
                     <option> {{player.position}} </option>
@@ -20,7 +21,9 @@
                     <option > Defender </option>
                     <option > Midfielder </option>
                     <option > Forward </option>
-                </select>   
+                </select>
+            </div>
+            <div class="flex">
                 <label for="squad_number">Shirt Number</label>
                 <input class="form-control" autocomplete="off"placeholder="Squad Number" type="text" value="{{player.squad_number}}"  name="squad_number"> 
             </div>
